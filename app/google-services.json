@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "420761390598",
+    "firebase_url": "https://instabum-b872b.firebaseio.com",
+    "project_id": "instabum-b872b",
+    "storage_bucket": "instabum-b872b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420761390598:android:d93363f88d19c21a",
+        "android_client_info": {
+          "package_name": "com.example.or_maayan.instabum"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "420761390598-gifeduaal4as5ab19om18s29gq7l9usn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.or_maayan.instabum",
+            "certificate_hash": "004cbf91ad4224618c965e4ef3dc6d01aa2eaade"
+          }
+        },
+        {
+          "client_id": "420761390598-62rga70rkor4n252j856plsgklk8gnmp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4rRZh6pcbnkTrjD2QtWO_E61APdu_V1g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "420761390598-62rga70rkor4n252j856plsgklk8gnmp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

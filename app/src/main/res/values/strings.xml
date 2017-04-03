@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">InstaBum</string>
+    <string name="SignInText">Sign in</string>
+    <string name="ForgotPassword">Forgot your password ?</string>
+    <string name="signUp">Sign up</string>
+    <string name="ProgressBarMessage">Loading</string>
+    <string name="AuthFailed">Auth Failed</string>
+    <string name="title_activity_main_tabs">MainTabsActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_feed_tabs">FeedTabs</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="logOut">Log out</string>
+</resources>
