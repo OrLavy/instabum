@@ -65,7 +65,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
         } else {
             UIService.getInstance().ShowProgressDialog(this);
 
-            AuthService.getInstance().SignUp_EmailPassword(credentials,OnSignInAttempt);
+            AuthService.getInstance().SignUp_EmailPassword(credentials, OnSignUpAttempt);
         }
     }
 
@@ -75,7 +75,7 @@ public class EmailPasswordActivity extends AppCompatActivity {
         } else {
             UIService.getInstance().ShowProgressDialog(this);
 
-            AuthService.getInstance().SignIn_EmailPassword(credentials,OnSignInAttempt);
+            AuthService.getInstance().SignIn_EmailPassword(credentials, OnSignInAttempt);
         }
     }
 
@@ -86,16 +86,27 @@ public class EmailPasswordActivity extends AppCompatActivity {
     private OnCompleteListener OnSignInAttempt = new OnCompleteListener() {
         @Override
         public void onComplete(@NonNull Task task) {
-            if (!task.isSuccessful()){
-                Toast.makeText(EmailPasswordActivity.this, R.string.AuthFailed,Toast.LENGTH_SHORT).show();
-            }else {
-                Intent intent = new Intent(EmailPasswordActivity.this, FeedTabs.class);
-                EmailPasswordActivity.this.startActivity(intent);
-            }
-
-            UIService.getInstance().hideProgressDialog(EmailPasswordActivity.this);
+            handleAuthenticationAttempt(task.isSuccessful(), FeedTabs.class);
         }
     };
+
+    private OnCompleteListener OnSignUpAttempt = new OnCompleteListener() {
+        @Override
+        public void onComplete(@NonNull Task task) {
+            handleAuthenticationAttempt(task.isSuccessful(), FeedTabs.class);
+        }
+    };
+
+    private void handleAuthenticationAttempt(boolean isSuccessful, Class newActivity){
+        if (! isSuccessful){
+            Toast.makeText(EmailPasswordActivity.this, R.string.AuthFailed,Toast.LENGTH_SHORT).show();
+        }else {
+            Intent intent = new Intent(EmailPasswordActivity.this, newActivity);
+            EmailPasswordActivity.this.startActivity(intent);
+        }
+
+        UIService.getInstance().hideProgressDialog(EmailPasswordActivity.this);
+    }
 
     private boolean validateForm() {
         boolean valid = true;

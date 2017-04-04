@@ -3,6 +3,7 @@ package com.example.or_maayan.instabum.services;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.example.or_maayan.instabum.R;
 import com.example.or_maayan.instabum.auth.EmailPasswordActivity;
@@ -53,5 +54,10 @@ public class UIService {
     public void changeActivity(Context context, Class targetClass){
         Intent intent = new Intent(context, targetClass);
         context.startActivity(intent);
+    }
+
+    public void makeToast(Context context, String message){
+        Toast toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

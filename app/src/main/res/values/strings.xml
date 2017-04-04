@@ -10,6 +10,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_feed_tabs">FeedTabs</string>
 
+
+    <string name="captionDialog_title">Post caption</string>
+    <string name="captionDialog_message">Please choose a caption for your post</string>
+
+    <string name="captionDialog_ok">Ok</string>
+    <string name="captionDialog_nocaption">No Caption</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logOut">Log out</string>
