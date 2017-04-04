@@ -1,5 +1,7 @@
 package com.example.or_maayan.instabum.services;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.support.annotation.NonNull;
@@ -8,6 +10,9 @@ import android.util.Log;
 import com.example.or_maayan.instabum.auth.Credentials;
 import com.example.or_maayan.instabum.auth.EmailPasswordActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
@@ -63,5 +68,26 @@ public class AuthService {
         this.auth.signOut();
     }
 
+    public void deleteUser(final Context callerContext){
+        FirebaseUser user = getCurrentUser();
+        if (user != null){
+            Task<Void> deleteTask = user.delete();
+
+            deleteTask.addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    UIService.getInstance().makeToast(callerContext,"User deleted");
+                    UIService.getInstance().changeActivity(callerContext,EmailPasswordActivity.class);
+                }
+            });
+
+            deleteTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    UIService.getInstance().makeToast(callerContext,"Failed to delete user");
+                }
+            });
+        }
+    }
 
 }
