@@ -243,12 +243,16 @@ public class FeedTabs extends AppCompatActivity implements AcountFragment.OnFrag
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position == 2){
-                return AcountFragment.newInstance();
+            switch (position){
+                case 0:
+                    return PlaceholderFragment.newInstance(position + 1);
+                case 1:
+                    return SelfFragment.newInstance();
+                case 2:
+                    return AcountFragment.newInstance();
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
             }
-            return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
