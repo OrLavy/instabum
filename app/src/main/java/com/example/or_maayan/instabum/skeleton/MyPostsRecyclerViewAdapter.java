@@ -1,29 +1,43 @@
 package com.example.or_maayan.instabum.skeleton;
 
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.or_maayan.instabum.R;
+import com.example.or_maayan.instabum.services.DataBaseService;
+import com.example.or_maayan.instabum.services.ImagesService;
+import com.example.or_maayan.instabum.services.StorageService;
 import com.example.or_maayan.instabum.skeleton.PostsFragment.OnListFragmentInteractionListener;
-import com.example.or_maayan.instabum.skeleton.dummy.DummyContent.DummyItem;
+import com.example.or_maayan.instabum.skeleton.dummy.PostContent;
+import com.example.or_maayan.instabum.util.GenericCallBack;
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link PostContent.PostItem} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyPostsRecyclerViewAdapter extends RecyclerView.Adapter<MyPostsRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<PostContent.PostItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyPostsRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
-        mValues = items;
+    public MyPostsRecyclerViewAdapter(OnListFragmentInteractionListener listener) {
+        mValues = PostContent.ITEMS;
         mListener = listener;
+
+        PostContent.addChangeListener(new GenericCallBack<Void>() {
+            @Override
+            public void CallBack(Void value) {
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -35,10 +49,7 @@ public class MyPostsRecyclerViewAdapter extends RecyclerView.Adapter<MyPostsRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).content);
-
+        holder.setItem(mValues.get(position));
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,22 +67,44 @@ public class MyPostsRecyclerViewAdapter extends RecyclerView.Adapter<MyPostsRecy
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements ImagesService.LoadImageTask.Listener {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
-        public DummyItem mItem;
+        public final TextView mCaptionView;
+        public final ImageView mImageView;
+        public final Button mStarredButton;
+        public PostContent.PostItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mCaptionView = (TextView) view.findViewById(R.id.postItem_Caption);
+            mImageView = (ImageView) view.findViewById(R.id.postItem_imageView);
+            mStarredButton = (Button) view.findViewById(R.id.postItem_starButton);
+        }
+
+        public void setItem(final PostContent.PostItem postItem){
+            this.mItem = postItem;
+            this.mCaptionView.setText(mItem.caption);
+            StorageService.getInstance().downloadImage(mItem.PhotoUrl);
+            new ImagesService.LoadImageTask(this).execute(mItem.PhotoUrl);
+            mStarredButton.setText(postItem.isStarred ? R.string.postItem_liked : R.string.postItem_notLiked);
+
+            mStarredButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DataBaseService.getInstance().toggleStartOnPost(postItem.originalPost);
+                }
+            });
         }
 
         @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public void onImageLoaded(Bitmap bitmap) {
+            mImageView.setImageBitmap(bitmap);
+        }
+
+        @Override
+        public void onError() {
+
         }
     }
 }

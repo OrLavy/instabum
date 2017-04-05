@@ -14,6 +14,7 @@ import com.example.or_maayan.instabum.R;
 import com.example.or_maayan.instabum.models.Post;
 import com.example.or_maayan.instabum.services.AuthService;
 import com.example.or_maayan.instabum.services.DataBaseService;
+import com.example.or_maayan.instabum.services.PermissionsService;
 import com.example.or_maayan.instabum.services.UIService;
 import com.example.or_maayan.instabum.util.GenericCallBack;
 import com.google.firebase.database.ValueEventListener;
@@ -69,7 +70,6 @@ public class SelfFragment extends Fragment {
         // Inflate the layout for this fragment
         final View inf = inflater.inflate(R.layout.fragment_self, container, false);
         initializeUi(inf);
-
 
         UIService.getInstance().ShowProgressDialog(inf.getContext());
 

@@ -35,6 +35,7 @@ import com.example.or_maayan.instabum.auth.EmailPasswordActivity;
 import com.example.or_maayan.instabum.services.AuthService;
 import com.example.or_maayan.instabum.services.DataBaseService;
 import com.example.or_maayan.instabum.services.ImagesService;
+import com.example.or_maayan.instabum.services.PermissionsService;
 import com.example.or_maayan.instabum.services.StorageService;
 import com.example.or_maayan.instabum.services.UIService;
 import com.example.or_maayan.instabum.util.GenericCallBack;
@@ -65,6 +66,8 @@ public class FeedTabs extends AppCompatActivity implements AcountFragment.OnFrag
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_tabs);
 
+        PermissionsService.getInstance().verifyStoragePermissions(this);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
@@ -88,7 +91,6 @@ public class FeedTabs extends AppCompatActivity implements AcountFragment.OnFrag
                 ImagesService.getInstance().takePicture(FeedTabs.this);
             }
         });
-
     }
 
     @Override
@@ -245,7 +247,7 @@ public class FeedTabs extends AppCompatActivity implements AcountFragment.OnFrag
         public Fragment getItem(int position) {
             switch (position){
                 case 0:
-                    return PlaceholderFragment.newInstance(position + 1);
+                    return PostsFragment.newInstance();
                 case 1:
                     return SelfFragment.newInstance();
                 case 2:

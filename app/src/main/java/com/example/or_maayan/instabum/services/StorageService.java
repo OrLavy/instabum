@@ -3,13 +3,10 @@ package com.example.or_maayan.instabum.services;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v7.util.SortedList;
 
 import com.example.or_maayan.instabum.util.GenericCallBack;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.database.Exclude;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -27,12 +24,12 @@ public class StorageService {
         return ourInstance;
     }
 
-    FirebaseStorage storageReference;
+    FirebaseStorage firebaseStorage;
     StorageReference imagesRef;
 
     private StorageService() {
-        this.storageReference = FirebaseStorage.getInstance();
-        this.imagesRef = storageReference.getReference("images");
+        this.firebaseStorage = FirebaseStorage.getInstance();
+        this.imagesRef = firebaseStorage.getReference("images");
     }
 
     public void uploadImage(Bitmap photo, final GenericCallBack<String> successCallback, final GenericCallBack<Exception> failureCallBack){
@@ -59,4 +56,20 @@ public class StorageService {
         });
     }
 
+    public void downloadImage(String imageUri){
+        StorageReference islandRef = imagesRef.child("images/island.jpg");
+
+        final long ONE_MEGABYTE = 1024 * 1024;
+        islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+            @Override
+            public void onSuccess(byte[] bytes) {
+                // Data for "images/island.jpg" is returns, use this as needed
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+            }
+        });
+    }
 }

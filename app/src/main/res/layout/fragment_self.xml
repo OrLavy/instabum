@@ -41,7 +41,7 @@
             android:layout_alignStart="@+id/textView2"
             android:layout_below="@+id/textView2"
             android:layout_marginTop="33dp"
-            android:text="Latest Post Stars :" />
+            android:text="Latest Post Bums :" />
 
         <TextView
             android:id="@+id/selfFragment_latestPostStars"
@@ -55,13 +55,13 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView4"
             android:layout_alignLeft="@+id/textView4"
+            android:layout_alignRight="@+id/textView4"
             android:layout_alignStart="@+id/textView4"
             android:layout_below="@+id/textView4"
             android:layout_marginTop="34dp"
-            android:text="Best Post Stars :"
-            android:layout_alignRight="@+id/textView4"
-            android:layout_alignEnd="@+id/textView4" />
+            android:text="Best Post Bums :" />
 
         <TextView
             android:id="@+id/selfFragment_bestPostStarsTextView"
