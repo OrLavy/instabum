@@ -85,9 +85,6 @@ public class FeedTabs extends AppCompatActivity implements AcountFragment.OnFrag
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 ImagesService.getInstance().takePicture(FeedTabs.this);
             }
         });

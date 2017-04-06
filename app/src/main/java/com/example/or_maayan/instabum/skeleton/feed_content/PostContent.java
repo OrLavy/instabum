@@ -1,4 +1,4 @@
-package com.example.or_maayan.instabum.skeleton.dummy;
+package com.example.or_maayan.instabum.skeleton.feed_content;
 
 import com.example.or_maayan.instabum.models.Post;
 import com.example.or_maayan.instabum.services.AuthService;
@@ -41,7 +41,7 @@ public class PostContent {
                 String userId = AuthService.getInstance().getCurrentUser().getUid();
                 for (Post post : feedPosts){
                     boolean isStarred = post.stars.containsKey(userId);
-                    addItem(new PostItem(post.id,post.title,post.photoUrl, isStarred, post));
+                    addItem(new PostItem(post.id,post.title,post.photoUrl,post.starCount ,isStarred, post));
                 }
 
                 for (GenericCallBack<Void> callBack : DATA_UPDATED_LIST){
@@ -68,13 +68,15 @@ public class PostContent {
         public final String id;
         public final String caption;
         public final String PhotoUrl;
+        public final int    totalBums;
         public final boolean isStarred;
         public final Post originalPost;
 
-        public PostItem(String id, String caption, String PhotoUrl, boolean isStarred, Post originalPost) {
+        public PostItem(String id, String caption, String PhotoUrl,int totalBums, boolean isStarred, Post originalPost) {
             this.id = id;
             this.caption = caption;
             this.PhotoUrl = PhotoUrl;
+            this.totalBums = totalBums;
             this.isStarred = isStarred;
             this.originalPost = originalPost;
         }

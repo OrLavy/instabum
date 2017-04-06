@@ -13,7 +13,7 @@ import com.example.or_maayan.instabum.services.DataBaseService;
 import com.example.or_maayan.instabum.services.ImagesService;
 import com.example.or_maayan.instabum.services.StorageService;
 import com.example.or_maayan.instabum.skeleton.PostsFragment.OnListFragmentInteractionListener;
-import com.example.or_maayan.instabum.skeleton.dummy.PostContent;
+import com.example.or_maayan.instabum.skeleton.feed_content.PostContent;
 import com.example.or_maayan.instabum.util.GenericCallBack;
 
 import java.util.List;
@@ -71,6 +71,7 @@ public class MyPostsRecyclerViewAdapter extends RecyclerView.Adapter<MyPostsRecy
         public final View mView;
         public final TextView mCaptionView;
         public final ImageView mImageView;
+        public final TextView mBumsView;
         public final Button mStarredButton;
         public PostContent.PostItem mItem;
 
@@ -79,13 +80,14 @@ public class MyPostsRecyclerViewAdapter extends RecyclerView.Adapter<MyPostsRecy
             mView = view;
             mCaptionView = (TextView) view.findViewById(R.id.postItem_Caption);
             mImageView = (ImageView) view.findViewById(R.id.postItem_imageView);
+            mBumsView = (TextView) view.findViewById(R.id.postItem_totalBums);
             mStarredButton = (Button) view.findViewById(R.id.postItem_starButton);
         }
 
         public void setItem(final PostContent.PostItem postItem){
             this.mItem = postItem;
             this.mCaptionView.setText(mItem.caption);
-            StorageService.getInstance().downloadImage(mItem.PhotoUrl);
+            this.mBumsView.setText(String.valueOf(postItem.totalBums) + " Bums");
             new ImagesService.LoadImageTask(this).execute(mItem.PhotoUrl);
             mStarredButton.setText(postItem.isStarred ? R.string.postItem_liked : R.string.postItem_notLiked);
 

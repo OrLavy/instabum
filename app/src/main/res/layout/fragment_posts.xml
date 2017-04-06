@@ -3,27 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="15dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp"
+    android:paddingRight="15dp">
 
-    <TextView
-        android:id="@+id/postItem_Caption"
+    <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        app:cardBackgroundColor="?attr/colorButtonNormal"
+        app:cardElevation="10dp">
 
-    <ImageView
-        android:id="@+id/postItem_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@android:drawable/stat_notify_error" />
+        <GridLayout
+            android:layout_width="384dp"
+            android:layout_height="269dp">
 
-    <Button
-        android:id="@+id/postItem_starButton"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+            <ImageView
+                android:id="@+id/postItem_imageView"
+                android:layout_width="192dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/postItem_totalBums"
+                android:paddingLeft="15dp"
+                app:srcCompat="@android:drawable/stat_notify_error" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/postItem_totalBums"
+                    android:layout_width="157dp"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="15dp"
+                    android:textAppearance="?attr/textAppearanceListItem" />
+
+                <TextView
+                    android:id="@+id/postItem_Caption"
+                    android:layout_width="139dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingLeft="30dp"
+                    android:textAppearance="?attr/textAppearanceListItem" />
+
+                <Button
+                    android:id="@+id/postItem_starButton"
+                    style="@android:style/Widget.Button"
+                    android:layout_width="114dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginLeft="15sp"/>
+
+            </LinearLayout>
+
+        </GridLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>

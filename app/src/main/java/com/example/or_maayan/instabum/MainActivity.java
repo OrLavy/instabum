@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PermissionsService.getInstance().verifyStoragePermissions(this);
 
         if(AuthService.getInstance().getCurrentUser() != null){
             Log.d(TAG, "User is already logged");

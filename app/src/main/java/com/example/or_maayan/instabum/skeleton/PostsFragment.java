@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.or_maayan.instabum.R;
-import com.example.or_maayan.instabum.skeleton.dummy.PostContent;
+import com.example.or_maayan.instabum.skeleton.feed_content.PostContent;
 
 /**
  * A fragment representing a list of Items.
