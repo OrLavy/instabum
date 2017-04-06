@@ -80,6 +80,11 @@ public class EmailPasswordActivity extends AppCompatActivity {
     }
 
     private void forgotPassword(Credentials credentials){
+        if (!validateForm()){
+            return;
+        } else {
+            AuthService.getInstance().forgotPassword(credentials,OnResetPasswordAttempt);
+        }
 
     }
 
@@ -94,6 +99,17 @@ public class EmailPasswordActivity extends AppCompatActivity {
         @Override
         public void onComplete(@NonNull Task task) {
             handleAuthenticationAttempt(task.isSuccessful(), FeedTabs.class);
+        }
+    };
+
+    private OnCompleteListener OnResetPasswordAttempt = new OnCompleteListener() {
+        @Override
+        public void onComplete(@NonNull Task task) {
+            if(task.isSuccessful()){
+                UIService.getInstance().makeToast(EmailPasswordActivity.this,"Reset email sent");
+            } else {
+                UIService.getInstance().makeToast(EmailPasswordActivity.this,"Failed to send reset email");
+            }
         }
     };
 

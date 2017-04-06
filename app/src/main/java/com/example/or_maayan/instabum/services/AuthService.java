@@ -90,4 +90,8 @@ public class AuthService {
         }
     }
 
+    public void forgotPassword(Credentials credentials, OnCompleteListener onCompleteListener){
+        this.auth.sendPasswordResetEmail(credentials.email).addOnCompleteListener(onCompleteListener);
+    }
+
 }
